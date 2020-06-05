@@ -91,8 +91,8 @@ class NidaqHardware:
             self.set_digital_port0(int('00000010', 2))
 
     @staticmethod
-    def set_digital_output(line=0, state=False):
-        digital_output = f'{daq.name}/port0/line{line}'
+    def toggle_power(state=False):
+        digital_output = f'{daq.name}/port1/line{0}'
         with nidaqmx.Task() as task:
             task.do_channels.add_do_chan(digital_output)
             task.write(state, auto_start=True)
