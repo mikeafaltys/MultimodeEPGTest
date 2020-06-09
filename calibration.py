@@ -1,7 +1,7 @@
 import pandas as pd
 import nidaqmx
 from nidaqmx.constants import TerminalConfiguration, AcquisitionType
-from ni import daq
+from ni import test_set
 import numpy as np
 import json
 
@@ -33,9 +33,9 @@ def get_voltage_across_sense_resistors(channel):
     sample_rate = 100000
     samples = int(sample_rate / 10)  # sample for 1/10 of a second
 
-    physical_channel = f'{daq.name}/ai0,{daq.name}/ai4'  # Iwe1
+    physical_channel = f'{test_set.name}/ai0,{test_set.name}/ai4'  # Iwe1
     if channel == 'Iwe2':
-        physical_channel = f'{daq.name}/ai2,{daq.name}/ai4'
+        physical_channel = f'{test_set.name}/ai2,{test_set.name}/ai4'
 
     channel_gain = 0.5  # because 5mA x 50ohms = 0.25 and gain increments are 0.1, 0.2, 0.5, 1.0
     with nidaqmx.Task() as ai_task:
@@ -54,7 +54,7 @@ def get_voltage_across_sense_resistors(channel):
 def calibrate_nidaq_using_6221_and_dvm(source='calibration.csv'):
     """
     Use a Keithley 6221 to a 2mA and then 15mA 0.5Hz looping through all current sense channels.
-    a0 to a2 to a4 to a7. A DVM can we used to check the current level is the 6221 is not calibrated.
+    a0 to a2 to a4 to a7. A DVM can iwe used to check the current level is the 6221 is not calibrated.
     Updates calibration.csv file
     :param source:
     :return:
