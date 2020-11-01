@@ -24,7 +24,7 @@ def run_test_script(filename):
 
     for index, row in df.iterrows():
         if pd.isnull(row['Test Name']):  # Test has not been run
-            ni.testset.load_resistance = row['Load']  
+            ni.testset.load_resistance = row['Load']
             if row['Mode'] == 'AC':
                 # Pull data from spreadsheet and create a test class instance
                 test = ni.AcTest(row['amp_ua'], row['pw_us'], row['ipi_us'], row['rpr'], row['frequency'],

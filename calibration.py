@@ -1,7 +1,7 @@
 import pandas as pd
 import nidaqmx
 from nidaqmx.constants import TerminalConfiguration, AcquisitionType
-from ni import test_set
+
 import numpy as np
 import json
 
